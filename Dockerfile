@@ -2,9 +2,8 @@
 FROM ubuntu:latest
 
 # Install CUPS
-RUN apt update
-RUN apt upgrade
-RUN apt install cups
+RUN apt-get update && apt-get -y upgrade
+RUN apt-get install cups
 
 # Make CUPS port available
 EXPOSE 631
