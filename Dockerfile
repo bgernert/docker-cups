@@ -13,8 +13,15 @@ RUN apt-get -qq autoclean && apt-get -qq autoremove && apt-get -qq clean
 # Make CUPS port available
 EXPOSE 631
 
+# Copy scripts and configurations files into container
+ADD start_cups /root/start_cups
+ADD cupsd.conf /root/cupsd.conf
+
+# Allow execution of start script
+RUN chmod u+x /root/start_cups
+
 # Export volumes
 VOLUME /config
 
 # Start cups
-CMD ["/usr/sbin/cupsd -f -C /etc/cups/cupsd.conf"]
+CMD ["/root/start_cups"]

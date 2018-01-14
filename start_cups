@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# Check for configuration file
+if [ ! -f /config/cupsd.conf ]; then
+    cp /root/cupsd.conf /config/cupsd.conf
+fi
+
+/usr/sbin/cupsd -f -C /config/cupsd.conf
