@@ -5,10 +5,17 @@ FROM ubuntu:latest
 RUN apt-get -qq update && apt-get -qq upgrade
 
 # Install CUPS and CUPS-PDF
-RUN apt-get -qq install cups cups-pdf
+RUN apt-get -qq install cups cups-pdf wget unzip
 
 # Clean up updates/install
 RUN apt-get -qq autoclean && apt-get -qq autoremove && apt-get -qq clean
+
+# Install DELL driver S282cdn/H825cdn
+RUN cd /tmp \
+&& wget https://downloads.dell.com/FOLDER03385341M/1/Printer_H825cdw_Driver_Dell_A00_Linux.zip \
+&& unzip Printer_H825cdw_Driver_Dell_A00_Linux.zip \
+&& dpkg -i S2825cdn-H825cdw/dell-color-mfp-s2825cdn-h825cdw-1.0-3_amd64.deb \
+&& cd
 
 # Make CUPS port available
 EXPOSE 631
@@ -25,3 +32,4 @@ VOLUME /config
 
 # Start cups
 CMD ["/root/start_cups"]
+
