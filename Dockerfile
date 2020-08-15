@@ -5,7 +5,7 @@ FROM ubuntu:latest
 RUN apt-get -qq update && apt-get -qq upgrade
 
 # Install CUPS and CUPS-PDF
-RUN apt-get -qq install cups cups-pdf wget unzip
+RUN DEBIAN_FRONTEND=noninteractive TZ=Europe/Berlin apt-get -qq install cups cups-pdf wget unzip
 
 # Clean up updates/install
 RUN apt-get -qq autoclean && apt-get -qq autoremove && apt-get -qq clean
