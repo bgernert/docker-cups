@@ -17,6 +17,11 @@ RUN cd /tmp && \
     dpkg -i S2825cdn-H825cdw/dell-color-mfp-s2825cdn-h825cdw-1.0-3_amd64.deb && \
     cd
 
+# Install Kyocera FS-C5100DN KPDL driver
+# See: https://www.openprinting.org/printer/Kyocera/Kyocera-FS-C5100DN_KPDL
+RUN mkdir /usr/share/ppd/Kyocera
+ADD ppd/Kyocera_FS-C5100DN_KPDL.ppd.gz /usr/share/ppd/Kyocera/Kyocera_FS-C5100DN_KPDL.ppd.gz
+
 # Copy scripts and configurations files into container
 ADD start_cups /root/start_cups
 ADD cupsd.conf /root/cupsd.conf
